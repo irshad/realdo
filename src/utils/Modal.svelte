@@ -5,7 +5,7 @@
 </script>
 
 {#if show}
-    <div class="modal-overlay" on:click={() => (show = !show)} transition:fade={{ duration: 150 }}>
+    <div class="modal-overlay" transition:fade={{ duration: 150 }}>
         <div class="modal-container">
             <slot />
         </div>
@@ -33,5 +33,6 @@
         width: 200px;
         border: 2px solid var(--dark-color);
         background-color: var(--light-color);
+        border-radius: 16px;
     }
 </style>

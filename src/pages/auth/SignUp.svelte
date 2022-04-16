@@ -27,7 +27,7 @@
         <div class="pin-section">
             <div id="input-value"></div>
         </div>
-        <button class="jump-in">
+        <button class="jump-in br-12">
             Let's Go
         </button>
     </form>
@@ -90,15 +90,17 @@
     }
 
     h2 {
+        position: absolute;
+        bottom: 16px;
         text-align: center;
-        font-size: 24px;
+        font-size: 21px;
         color: var(--dark-color);
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
     }
 
     h2 span {
-        font-size: 18px;
+        font-size: 12px;
         color: var(--dark-color);
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;

@@ -47,6 +47,7 @@ input[type="number"] {
 }
 
 button {
+    cursor: pointer;
     transition: box-shadow 0.2s ease 0s, transform 0.2s ease 0s;
 }
 
@@ -57,17 +58,25 @@ button {
 }
 
 .pincode-input {
-	width: 44px;
+	width: 48px;
     height: 44px;
     padding: 0;
     font-size: 24px;
     font-weight: 700;
     text-align: center;
 	font-family: 'Roboto Mono', monospace;
-    border-radius: 0;
+    border-radius: 12px;
     border: 2px solid var(--dark-color);
 }
 
 .pincode-input:focus {
     outline: none;
+}
+
+.br-12 {
+    border-radius: 12px;
+}
+
+.br-8 {
+    border-radius: 8px;
 }

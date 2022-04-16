@@ -45,11 +45,11 @@
             <div class="pin-section">
                 <div id="input-value"></div>
             </div>
-            <button type="submit" class="jump-in">
+            <button type="submit" class="jump-in br-12">
                 Jump In
             </button>
         </form>
-        <button class="forgot-pin" on:click={fogotPin}>
+        <button class="forgot-pin br-8" on:click={fogotPin}>
             Fogot Pin
         </button>
     </div>
@@ -73,10 +73,10 @@
         </h4>
 
         <div class="btn-section">
-            <button class="cancel-btn" on:click={() => show=!show}>
+            <button class="cancel-btn br-8" on:click={() => show=!show}>
                 Cancel
             </button>
-            <button class="delete-btn" on:click={deleteButton}>
+            <button class="delete-btn br-8" on:click={deleteButton}>
                 Delete
             </button>
         </div>
@@ -131,7 +131,7 @@
     .forgot-pin {
         width: fit-content;
         font-size: 12px;
-        line-height: 18px;
+        padding: 4px 8px;
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
         float: right;
@@ -142,20 +142,23 @@
     }
 
     .forgot-pin:hover {
-        transform: translate(3px,-3px);
-        box-shadow: -3px 3px 0 var(--dark-color);
+        transform: translate(4px,-4px);
+        box-shadow: -4px 4px 0 var(--dark-color);
     }
 
     h2 {
+        bottom: 16px;
+        position: absolute;
         text-align: center;
-        font-size: 24px;
+        font-size: 21px;
         color: var(--dark-color);
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
     }
 
     h2 span {
-        font-size: 18px;
+        display: none;
+        font-size: 12px;
         color: var(--dark-color);
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
@@ -185,9 +188,10 @@
         width: 100%;
         height: 32px;
         border: 2px solid var(--dark-color);
-        border-radius: 0;
         padding: 0;
         cursor: pointer;
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
     }
 
     .cancel-btn {
@@ -196,5 +200,10 @@
 
     .delete-btn {
         background-color: var(--danger-color);
+    }
+
+    .cancel-btn:hover, .delete-btn:hover {
+        transform: translate(4px,-4px);
+        box-shadow: -4px 4px 0 var(--dark-color);
     }
 </style>

@@ -35,9 +35,12 @@
 <Topbar />
 <Section>
     {#each todoList as item, index}
-        <Card on:delete={() => removeTodoFromList(index)} on:done={() => todoComplete(index)} todoStatus={todoList[index].status}>
-            {item.todo}
-        </Card>
+        <Card 
+            on:delete={() => removeTodoFromList(index)} 
+            on:done={() => todoComplete(index)} 
+            todoStatus={todoList[index].status}
+            text={item.todo}
+        />
     {/each} 
 
 </Section>
