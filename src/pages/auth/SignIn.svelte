@@ -1,0 +1,225 @@
+<script>
+    import { createEventDispatcher, onMount } from "svelte";
+    import { Pincode, PincodeInput } from "svelte-pincode";
+    import Modal from "../../utils/Modal.svelte";
+
+    export let password = '';
+    let savedPassword;
+    let show = false;
+    let input;
+    const dispatch = createEventDispatcher();
+
+    onMount(() => {
+		input.focus();
+        savedPassword = localStorage.getItem('pin');
+    });
+
+    const submit = () => {
+        if (atob(savedPassword) == password) {
+            dispatch('goto');
+        } else {
+            alert('Wrong PIN');
+        }
+    };
+
+    const fogotPin = () => {
+        show=!show;
+    };
+
+    const deleteButton = () => {
+        localStorage.clear();
+        window.location.reload();
+    };
+</script>
+
+<div class="main-section">
+    <div>
+        <form class="block-section" on:submit|preventDefault={submit}>
+            <h1>Unlock with you PIN</h1>
+            <div class="pin-section">
+                <Pincode bind:value={password} type="numeric">
+                    <PincodeInput bind:ref={input} />
+                    <PincodeInput />
+                    <PincodeInput />
+                    <PincodeInput />
+                  </Pincode>
+            </div>
+            <button type="submit" class="jump-in">
+                Jump In
+            </button>
+        </form>
+        <button class="forgot-pin" on:click={fogotPin}>
+            Fogot Pin
+        </button>
+    </div>
+
+    <h2>
+        RealDO 
+        <br>
+        <span>
+            Made with ❤️ by 
+            <a href="https://tecode.in" target="_blank">
+                Irshad Ali
+            </a>
+        </span>
+    </h2>
+</div>
+
+{#if show}
+    <Modal>
+        <h4>
+            All your data will <br> be removed?
+        </h4>
+
+        <div class="btn-section">
+            <button class="cancel-btn" on:click={() => show=!show}>
+                Cancel
+            </button>
+            <button class="delete-btn" on:click={deleteButton}>
+                Delete
+            </button>
+        </div>
+    </Modal>
+{/if}
+
+<style>
+    .main-section {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: space-around;
+        background-color: var(--primary-color);
+    }
+
+    .pin-section {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    h1 {
+        margin: 0;
+        font-size: 24px;
+        padding-bottom: 24px;
+        text-align: center;
+        color: var(--dark-color);
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    :global([data-pincode]) {
+        border: none !important;
+        display: flex !important;
+        gap: 28px !important;
+    }
+
+    :global([data-pincode] input) {
+        font-size: 24px !important;
+        font-weight: 700;
+        width: 44px !important;
+        height: 44px !important;
+        border: 2px solid var(--dark-color) !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    :global([data-pincode] input:focus) {
+        outline: none !important;
+    }
+
+    .jump-in {
+        width: 100%;
+        height: 44px;
+        color: var(--dark-color);
+        font-size: 18px;
+        font-weight: 700;
+        padding-top: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+        border: 2px solid var(--dark-color);
+        background-color: var(--success-color);
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+        padding-bottom: 4px;
+        cursor: pointer;
+    }
+
+    .jump-in:hover {
+        transform: translate(4px,-4px);
+        box-shadow: -4px 4px 0 var(--dark-color);
+    }
+
+    .forgot-pin {
+        width: fit-content;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+        float: right;
+        margin-top: 16px;
+        border: 2px solid var(--dark-color);
+        background-color: var(--danger-color);
+        cursor: pointer;
+    }
+
+    .forgot-pin:hover {
+        transform: translate(3px,-3px);
+        box-shadow: -3px 3px 0 var(--dark-color);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: var(--dark-color);
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    h2 span {
+        font-size: 18px;
+        color: var(--dark-color);
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    a {
+        color: var(--dark-color);
+    }
+
+    h4 {
+        margin: 0 0 24px 0;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dark-color);
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .btn-section {
+        width: 100%;
+        gap: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-section button {
+        width: 100%;
+        height: 32px;
+        border: 2px solid var(--dark-color);
+        border-radius: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .cancel-btn {
+        background-color: var(--success-color);
+    }
+
+    .delete-btn {
+        background-color: var(--danger-color);
+    }
+</style>
