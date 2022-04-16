@@ -1,12 +1,18 @@
 <script>
     import { onMount } from "svelte";
-    import { Pincode, PincodeInput } from "svelte-pincode";
+	import PincodeInput from 'pincode-input';
 
     export let password = '';
-    let input;
 
     onMount(() => {
-		input.focus()
+		new PincodeInput('#input-value', {
+			count: 4,
+			secure: false,
+			previewDuration: 200,
+			onInput: (value) => {
+                password = value;
+			}
+		})
     });
 
     const submit = () => {
@@ -19,12 +25,7 @@
     <form class="block-section" on:submit|preventDefault={submit}>
         <h1>Create new PIN</h1>
         <div class="pin-section">
-            <Pincode bind:value={password}>
-                <PincodeInput bind:ref={input} />
-                <PincodeInput />
-                <PincodeInput />
-                <PincodeInput />
-              </Pincode>
+            <div id="input-value"></div>
         </div>
         <button class="jump-in">
             Let's Go
@@ -54,11 +55,6 @@
         background-color: var(--primary-color);
     }
 
-    .pin-section {
-        display: flex;
-        justify-content: center;
-    }
-
     h1 {
         margin: 0;
         font-size: 24px;
@@ -67,25 +63,6 @@
         color: var(--dark-color);
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
-    }
-
-    :global([data-pincode]) {
-        border: none !important;
-        display: flex;
-        gap: 16px;
-    }
-
-    :global([data-pincode] input) {
-        font-size: 24px !important;
-        font-weight: 700;
-        width: 44px !important;
-        height: 44px !important;
-        border: 2px solid var(--dark-color) !important;
-        padding: 0 !important;
-    }
-
-    :global([data-pincode] input:focus) {
-        outline: none !important;
     }
 
     .jump-in {
