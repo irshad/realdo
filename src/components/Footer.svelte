@@ -22,7 +22,7 @@
     form {
         height: 48px;
         padding: 0 16px;
-        border: 2px solid var(--dark-color);
+        border-top: 2px solid var(--dark-color);
         background-color: var(--primary-color);
         display: flex;
         gap: 16px;

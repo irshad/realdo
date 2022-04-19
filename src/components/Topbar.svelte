@@ -15,7 +15,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 2px solid var(--dark-color);
+        border-bottom: 2px solid var(--dark-color);
         background-color: var(--primary-color);
     }
 
