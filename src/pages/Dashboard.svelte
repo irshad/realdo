@@ -4,6 +4,7 @@
     import Footer from "../components/Footer.svelte";
     import Section from "../components/Section.svelte";
     import Card from "../components/Card.svelte";
+    import Placeholder from "../components/Placeholder.svelte";
 
     let todoItem = '';
     let todoList = [];
@@ -34,15 +35,18 @@
 
 <Topbar />
 <Section>
-    {#each todoList as item, index}
-        <Card 
-            on:delete={() => removeTodoFromList(index)} 
-            on:done={() => todoComplete(index)} 
-            todoStatus={todoList[index].status}
-            text={item.todo}
-        />
-    {/each} 
-
+    {#if todoList.length > 1}    
+        {#each todoList as item, index}
+            <Card 
+                on:delete={() => removeTodoFromList(index)} 
+                on:done={() => todoComplete(index)} 
+                todoStatus={todoList[index].status}
+                text={item.todo}
+            />
+        {/each}
+    {:else}
+        <Placeholder />
+    {/if}
 </Section>
 <Footer bind:todoItem on:todo={addTodo}/>
 
