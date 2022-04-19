@@ -35,7 +35,7 @@
 
 <Topbar />
 <Section>
-    {#if todoList.length > 1}    
+    {#if todoList.length >= 1}    
         {#each todoList as item, index}
             <Card 
                 on:delete={() => removeTodoFromList(index)} 

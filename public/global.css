@@ -18,8 +18,16 @@ body {
     --danger-color: #fa5252;
 }
 
+.br-12 {
+    border-radius: 12px;
+}
+
+.br-8 {
+    border-radius: 8px;
+}
+
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 0;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -71,12 +79,4 @@ button {
 
 .pincode-input:focus {
     outline: none;
-}
-
-.br-12 {
-    border-radius: 12px;
-}
-
-.br-8 {
-    border-radius: 8px;
 }
