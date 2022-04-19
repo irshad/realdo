@@ -117,6 +117,8 @@
         padding: 0;
         cursor: pointer;
         margin-top: 8px;
+        font-weight: 800;
+        font-family: 'Roboto Mono', monospace;
     }
 
     .done-btn {

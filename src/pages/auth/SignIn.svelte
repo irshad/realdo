@@ -41,7 +41,7 @@
 <div class="main-section">
     <div>
         <form class="block-section" on:submit|preventDefault={submit}>
-            <h1>Unlock with you PIN</h1>
+            <h1>Unlock with your PIN</h1>
             <div class="pin-section">
                 <div id="input-value"></div>
             </div>
