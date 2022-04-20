@@ -20,6 +20,14 @@ body {
     --danger-color: #fa5252;
 }
 
+.danger {
+    background-color: var(--danger-color);
+}
+
+.success {
+    background-color: var(--success-color);
+}
+
 .br-12 {
     border-radius: 12px;
 }

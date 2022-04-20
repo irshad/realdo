@@ -6,18 +6,9 @@
 
 <div class="toast-wrapper">
     {#if $Toast.show}
-        <div
-            class="toast-item {$Toast.type}"
-            in:fly={{
-                delay: 0,
-                duration: 300,
-                x: 0,
-                y: 50,
-                opacity: 0.1,
-                easing: backOut,
-            }}
-            out:fade={{ duration: 200, opacity: 0 }}
-        >
+        <div class="toast-item {$Toast.type}"
+            in:fly={{ delay: 0, duration: 300, x: 0, y: 50, opacity: 0.1, easing: backOut, }}
+            out:fade={{ duration: 200, opacity: 0 }}>
             {$Toast.message}
         </div>
     {/if}
@@ -44,7 +35,7 @@
         font-weight: 800;
         font-family: "Roboto Mono", monospace;
         color: var(--dark-color);
-        border: 2px solid var(-dark-color);
+        border: 2px solid var(--dark-color);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     }
 </style>

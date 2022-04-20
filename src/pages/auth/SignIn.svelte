@@ -2,6 +2,7 @@
     import { createEventDispatcher, onMount } from "svelte";
     import Modal from "../../utils/Modal.svelte";
 	import PincodeInput from 'pincode-input';
+    import Toast from "../../stores/toast";
 
     export let password = '';
     let savedPassword;
@@ -24,7 +25,8 @@
         if (atob(savedPassword) == password) {
             dispatch('goto');
         } else {
-            alert('Wrong PIN');
+            // alert('Wrong PIN');
+            Toast.error('Wrong PIN');
         }
     };
 

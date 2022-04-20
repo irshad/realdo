@@ -19,26 +19,28 @@
     }
 </script>
 
-<OutClick on:outclick={() => menu = false}>
-    <div class="main-section">
-        <div class="card" class:todo-done={todoStatus}>
-            <div class="todo-text" title={text}>
+<div class="main-section">
+    <div class="card" class:todo-done={todoStatus}>
+        <div class="todo-text-parent" title={text} on:click>
+            <div class="todo-text">
                 {@html text}
             </div>
-            <button class="menu-btn br-8" on:click={() => menu =!menu}>
-                {#if todoStatus}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                {:else}              
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"> </circle>
-                        <circle cx="12" cy="19" r="1"></circle>
-                    </svg>
-                {/if}
-            </button>
         </div>
-        
+        <button class="menu-btn br-8" on:click={() => menu =!menu}>
+            {#if todoStatus}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            {:else}              
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"> </circle>
+                    <circle cx="12" cy="19" r="1"></circle>
+                </svg>
+            {/if}
+        </button>
+    </div>
+    
+    <OutClick on:outclick={() => menu = false}>
         {#if menu}
             <div class="menu">
                 <button class="done-btn br-8" on:click={doneButton}>
@@ -57,8 +59,8 @@
                 </span>
             </div>
         {/if}
-    </div>
-</OutClick>
+    </OutClick>
+</div>
 
 <style>
     .main-section {
@@ -67,7 +69,8 @@
     }
 
     .card {
-        padding: 16px;
+        height: 62px;
+        padding: 0 16px;
         gap: 8px;
         display: flex;
         align-items: center;
@@ -78,7 +81,17 @@
         cursor: pointer;
     }
 
+    .todo-text-parent {
+        height: 100%;
+        width: 84%;
+        display: flex;
+        align-items: center;
+    }
+
     .todo-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 16px;
         font-weight: 800;
         font-family: 'Roboto Mono', monospace;
@@ -92,6 +105,11 @@
         background-color: var(--warning-color);
         border: 2px solid var(--dark-color);
         cursor: pointer;
+    }
+
+    .menu-btn:hover {
+        transform: translate(4px,-4px);
+        box-shadow: -4px 4px 0 var(--dark-color);
     }
 
     .menu {

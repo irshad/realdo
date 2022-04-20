@@ -5,9 +5,12 @@
     import Section from "../components/Section.svelte";
     import Card from "../components/Card.svelte";
     import Placeholder from "../components/Placeholder.svelte";
-    import Sidenav from "../components/Sidenav.svelte";
+    import TodoModal from "../components/TodoModal.svelte";
 
     let todoItem = '';
+    let todoModalText = '';
+    let todoModalStatus = '';
+    let todoModal;
     let todoList = [];
 
     onMount(() => {
@@ -20,6 +23,12 @@
 		todoList = [...todoList, {todo: todoItem, status: false}];
 		todoItem = '';
         localStorage.setItem('todoList', JSON.stringify(todoList));
+    };
+
+    const openTodo = (index) => {
+        todoModal = !todoModal;
+        todoModalText = todoList[index].todo;
+        todoModalStatus = todoList[index].status;
     };
 
     const removeTodoFromList = (index) => {
@@ -43,6 +52,7 @@
     {#if todoList.length >= 1}    
         {#each todoList as item, index}
             <Card 
+                on:click={() => openTodo(index)}
                 on:delete={() => removeTodoFromList(index)} 
                 on:done={() => todoComplete(index)} 
                 todoStatus={todoList[index].status}
@@ -53,7 +63,8 @@
         <Placeholder />
     {/if}
 </Section>
-<Footer bind:todoItem on:todo={addTodo}/>
+<Footer bind:todoItem on:todo={addTodo} />
+<TodoModal bind:todoModal bind:todoModalText bind:todoModalStatus/>
 
 <style>
 
