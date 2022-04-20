@@ -7,7 +7,7 @@
 
 {#if loading}
     <div class="main-section" transition:fade={{ duration: 150 }}>
-        <BarLoader size="60" color="#000" unit="px" duration="1s"></BarLoader>
+        <BarLoader size="60" color="#000" unit="px" duration="1s" />
     </div>
 {/if}
 
@@ -18,6 +18,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 9999;
         inset: 0;
         position: absolute;
         background-color: var(--primary-color);

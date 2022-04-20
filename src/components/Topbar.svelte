@@ -1,16 +1,18 @@
 <script>
     import Loader from "./Loader.svelte";
     import Sidenav from "./Sidenav.svelte";
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 
     let show = false;
     let loading = false;
 
     const navHeaderButton = () => {
+        dispatch('refresh');
         loading = !loading;
 
         setTimeout(() => {
             loading = !loading;
-            window.location.reload();
         }, 1000);
     };
 </script>

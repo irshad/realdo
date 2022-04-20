@@ -32,9 +32,13 @@
         todoList[index].status = !todoList[index].status;
         localStorage.setItem('todoList', JSON.stringify(todoList))
     }
+
+    const refreshTodoList = () => {
+        todoList = JSON.parse(localStorage.getItem("todoList"));
+    }
 </script>
 
-<Topbar />
+<Topbar on:refresh={refreshTodoList} />
 <Section>
     {#if todoList.length >= 1}    
         {#each todoList as item, index}
