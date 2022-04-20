@@ -11,7 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: calc(100% - 132px);
+        height: 100%;
         font-size: 21px;
         font-weight: 800;
         font-family: 'Roboto Mono', monospace;

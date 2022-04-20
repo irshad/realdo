@@ -5,6 +5,7 @@
     import Section from "../components/Section.svelte";
     import Card from "../components/Card.svelte";
     import Placeholder from "../components/Placeholder.svelte";
+    import Sidenav from "../components/Sidenav.svelte";
 
     let todoItem = '';
     let todoList = [];
