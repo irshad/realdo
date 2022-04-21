@@ -87,6 +87,6 @@ button {
     border: 2px solid var(--dark-color);
 }
 
-.pincode-input:focus {
+.pincode-input:focus, textarea:focus {
     outline: none;
 }

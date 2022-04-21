@@ -53,6 +53,16 @@
         todoModalStatus = todoList[index].status;
     };
 
+    const updateTodo = () => {
+        todoList.forEach((item, index) => {
+            if (item.id === todoModalID) {
+                todoList[index].todo = todoModalText;
+                todoList[index].status = todoModalStatus;
+            }
+        });
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+    };
+
     const refreshTodoList = () => {
         todoList = JSON.parse(localStorage.getItem("todoList"));
     }
@@ -75,7 +85,7 @@
     {/if}
 </Section>
 <Footer bind:todoItem on:todo={addTodo} />
-<TodoModal bind:todoModal bind:todoModalText bind:todoModalStatus/>
+<TodoModal bind:todoModal bind:todoModalText bind:todoModalStatus bind:todoModalID on:updateTodo={updateTodo}/>
 
 <style>
 

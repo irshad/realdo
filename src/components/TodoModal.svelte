@@ -8,6 +8,7 @@
     export let todoModalID = '';
     export let todoModalText = '';
     export let todoModalStatus = '';
+    console.log(todoModalID);
 
     const updateTodo = () => {
         dispatch('updateTodo', {
@@ -31,11 +32,7 @@
                 </button>
             </div>
 
-            <!-- <textarea class="todo-text-area" bind:value={todoModalText} on:keyup={updateTodo}/> -->
-
-            <div class="todo-text-area">
-                {todoModalText}
-            </div>
+            <textarea class="todo-text-area" bind:value={todoModalText} on:keyup={updateTodo}/>
         </div>
     </div>
 {/if}
