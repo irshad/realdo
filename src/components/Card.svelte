@@ -1,7 +1,6 @@
 <script>
 	import OutClick from 'svelte-outclick';
     import { createEventDispatcher } from "svelte";
-    import { hapticFeedback } from "../utils/vibrate"
     
     const dispatch = createEventDispatcher();
     export let menu = false;
@@ -9,12 +8,10 @@
     export let text = '';
 
     const doneButton = () => {
-        hapticFeedback.vibratePhone();
         dispatch('done');
     }
 
     const deleteButton = () => {
-        hapticFeedback.vibratePhone();
         dispatch('delete');
     }
 </script>

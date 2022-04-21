@@ -1,8 +1,19 @@
 <script>
     import { fly, fade } from 'svelte/transition';
+    import { createEventDispatcher } from "svelte";
+    
+    const dispatch = createEventDispatcher();
+
     export let todoModal = false;
+    export let todoModalID = '';
     export let todoModalText = '';
     export let todoModalStatus = '';
+
+    const updateTodo = () => {
+        dispatch('updateTodo', {
+            text: todoModalText,
+        });
+    };
 </script>
 
 {#if todoModal}
@@ -19,6 +30,8 @@
                     </svg>
                 </button>
             </div>
+
+            <!-- <textarea class="todo-text-area" bind:value={todoModalText} on:keyup={updateTodo}/> -->
 
             <div class="todo-text-area">
                 {todoModalText}

@@ -7,11 +7,13 @@
     import Placeholder from "../components/Placeholder.svelte";
     import TodoModal from "../components/TodoModal.svelte";
 
+    let id = '';
     let todoItem = '';
+    let todoList = [];
+    let todoModal;
+    let todoModalID = '';
     let todoModalText = '';
     let todoModalStatus = '';
-    let todoModal;
-    let todoList = [];
 
     onMount(() => {
         if (localStorage.getItem("todoList")) {
@@ -19,16 +21,18 @@
         }
     });
 
+    const mongoObjectId = () => {
+		id = (new Date().getTime() / 1000 | 0).toString(16);
+		id = id + 'xxxxxxxxxxxxxxxx' .replace(/[x]/g, function() {
+				return (Math.random() * 16 | 0).toString(16);
+		}).toLowerCase();
+	};
+
     const addTodo = () => {
-		todoList = [...todoList, {todo: todoItem, status: false}];
+        mongoObjectId();
+		todoList = [...todoList, {id: id, todo: todoItem, status: false}];
 		todoItem = '';
         localStorage.setItem('todoList', JSON.stringify(todoList));
-    };
-
-    const openTodo = (index) => {
-        todoModal = !todoModal;
-        todoModalText = todoList[index].todo;
-        todoModalStatus = todoList[index].status;
     };
 
     const removeTodoFromList = (index) => {
@@ -41,6 +45,13 @@
         todoList[index].status = !todoList[index].status;
         localStorage.setItem('todoList', JSON.stringify(todoList))
     }
+
+    const openTodo = (index) => {
+        todoModal = !todoModal;
+        todoModalID = todoList[index].id;
+        todoModalText = todoList[index].todo;
+        todoModalStatus = todoList[index].status;
+    };
 
     const refreshTodoList = () => {
         todoList = JSON.parse(localStorage.getItem("todoList"));
