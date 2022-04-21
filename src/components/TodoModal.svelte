@@ -11,9 +11,7 @@
     console.log(todoModalID);
 
     const updateTodo = () => {
-        dispatch('updateTodo', {
-            text: todoModalText,
-        });
+        dispatch('updateTodo');
     };
 </script>
 
@@ -104,5 +102,6 @@
         font-size: 16px;
         font-weight: 800;
         font-family: 'Roboto Mono', monospace;
+        resize: none;
     }
 </style>

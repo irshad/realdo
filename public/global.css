@@ -11,6 +11,13 @@ body {
     user-select: none;
 }
 
+* {
+    outline: none;
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
 :root {
     --light-color: #ffffff;
     --dark-color: #000000;
@@ -18,14 +25,6 @@ body {
     --success-color: #40c057;
     --warning-color: #fd7e14;
     --danger-color: #fa5252;
-}
-
-.danger {
-    background-color: var(--danger-color);
-}
-
-.success {
-    background-color: var(--success-color);
 }
 
 .br-12 {
@@ -36,21 +35,10 @@ body {
     border-radius: 8px;
 }
 
-::-webkit-scrollbar {
-    width: 0;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-}
-
-::-moz-selection {
-    background: var(--primary-color);
-}
-
-::selection {
-    background: var(--primary-color);
-}
+::-webkit-scrollbar { width: 0; }
+::-webkit-scrollbar-thumb { background-color: var(--primary-color); }
+::-moz-selection { background: var(--primary-color);}
+::selection { background: var(--primary-color); }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -85,8 +73,4 @@ button {
 	font-family: 'Roboto Mono', monospace;
     border-radius: 12px;
     border: 2px solid var(--dark-color);
-}
-
-.pincode-input:focus, textarea:focus {
-    outline: none;
 }
