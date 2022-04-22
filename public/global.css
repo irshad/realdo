@@ -2,11 +2,20 @@ html,
 body {
     margin: 0;
     padding: 0;
+    position: relative;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: "Roboto Mono", monospace;
+    user-select: none;
+}
+
+* {
+    outline: none;
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -18,21 +27,18 @@ body {
     --danger-color: #fa5252;
 }
 
-::-webkit-scrollbar {
-    width: 5px;
+.br-12 {
+    border-radius: 12px;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
+.br-8 {
+    border-radius: 8px;
 }
 
-::-moz-selection {
-    background: var(--primary-color);
-}
-
-::selection {
-    background: var(--primary-color);
-}
+::-webkit-scrollbar { width: 0; }
+::-webkit-scrollbar-thumb { background-color: var(--primary-color); }
+::-moz-selection { background: var(--primary-color);}
+::selection { background: var(--primary-color); }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -67,16 +73,4 @@ button {
 	font-family: 'Roboto Mono', monospace;
     border-radius: 12px;
     border: 2px solid var(--dark-color);
-}
-
-.pincode-input:focus {
-    outline: none;
-}
-
-.br-12 {
-    border-radius: 12px;
-}
-
-.br-8 {
-    border-radius: 8px;
 }

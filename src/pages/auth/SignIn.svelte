@@ -2,6 +2,7 @@
     import { createEventDispatcher, onMount } from "svelte";
     import Modal from "../../utils/Modal.svelte";
 	import PincodeInput from 'pincode-input';
+    import Toast from "../../stores/toast";
 
     export let password = '';
     let savedPassword;
@@ -20,11 +21,16 @@
 		});
     });
 
+    $:if(password.length == 4) {
+        submit();
+    }
+
     const submit = () => {
         if (atob(savedPassword) == password) {
             dispatch('goto');
         } else {
-            alert('Wrong PIN');
+            // alert('Wrong PIN');
+            Toast.error('Wrong PIN');
         }
     };
 
@@ -41,7 +47,7 @@
 <div class="main-section">
     <div>
         <form class="block-section" on:submit|preventDefault={submit}>
-            <h1>Unlock with you PIN</h1>
+            <h1>Unlock with your PIN</h1>
             <div class="pin-section">
                 <div id="input-value"></div>
             </div>
@@ -55,10 +61,10 @@
     </div>
 
     <h2>
-        RealDO 
+        RealDO
         <br>
         <span>
-            Made with ❤️ by 
+            Made with ❤️ by
             <a href="https://tecode.in" target="_blank">
                 Irshad Ali
             </a>
