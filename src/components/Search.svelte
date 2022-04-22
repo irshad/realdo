@@ -14,7 +14,7 @@
 </script>
 
 {#if showSearch}
-    <div class="main-section" in:fly={{ x:3000, duration: 600 }} out:fly={{ x:3000, duration: 1200 }}>
+    <div class="main-section" in:fly={{ x:2000, duration: 300 }} out:fly={{ x:3000, duration: 1200 }}>
         <div class="page-inside">
             <div class="search-header">
                 <button class="search-modal-close-btn" on:click={() => {(showSearch = !showSearch), (searchValue = '')}}>

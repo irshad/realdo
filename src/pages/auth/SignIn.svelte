@@ -20,6 +20,10 @@
 			}
 		});
     });
+    
+    $:if(password.length == 4) {
+        submit();
+    }
 
     const submit = () => {
         if (atob(savedPassword) == password) {

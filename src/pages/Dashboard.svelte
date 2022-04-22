@@ -85,7 +85,7 @@
         searchList = [];
         if(searchValue != '') {
             todoList.forEach((item) => {
-                if (item.todo.includes(searchValue) && searchValue !== '') {
+                if (item.todo.toLowerCase().includes(searchValue.toLowerCase()) && searchValue !== '') {
                     searchList.push(item);
                 }
             });
