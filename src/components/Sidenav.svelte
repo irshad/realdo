@@ -110,7 +110,7 @@
         transform: translate(4px,-4px);
         box-shadow: -4px 4px 0 var(--dark-color);
     }
-    
+
     h2 {
         right: 0;
         left: 0;

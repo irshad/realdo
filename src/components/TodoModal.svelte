@@ -1,7 +1,7 @@
 <script>
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from "svelte";
-    
+
     const dispatch = createEventDispatcher();
 
     export let todoModal = false;
@@ -26,7 +26,7 @@
                 </div>
                 <div class="modal-btn-section">
                     <button class="todo-modal-close-btn" on:click={() => edit=!edit}>
-                        {#if edit}                        
+                        {#if edit}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 20h9"></path>
                                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
