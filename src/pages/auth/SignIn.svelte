@@ -20,7 +20,7 @@
 			}
 		});
     });
-    
+
     $:if(password.length == 4) {
         submit();
     }
@@ -61,10 +61,10 @@
     </div>
 
     <h2>
-        RealDO 
+        RealDO
         <br>
         <span>
-            Made with ❤️ by 
+            Made with ❤️ by
             <a href="https://tecode.in" target="_blank">
                 Irshad Ali
             </a>

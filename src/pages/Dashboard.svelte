@@ -80,7 +80,7 @@
         todoList = todoList;
         searchList = searchList;
     };
-    
+
     const search = () => {
         searchList = [];
         if(searchValue != '') {
@@ -102,12 +102,12 @@
 
 <Topbar on:openSearch={() => showSearch = !showSearch} />
 <Section>
-    {#if todoList.length >= 1}    
+    {#if todoList.length >= 1}
         {#each todoList as item}
-            <Card 
+            <Card
                 on:click={() => openTodo(item.id)}
-                on:delete={() => removeTodoFromList(item.id)} 
-                on:done={() => todoComplete(item.id)} 
+                on:delete={() => removeTodoFromList(item.id)}
+                on:done={() => todoComplete(item.id)}
                 todoStatus={item.status}
                 text={item.todo}
                 search={false}
@@ -124,10 +124,10 @@
 <Search bind:showSearch on:search={search} bind:searchValue>
     {#if searchList.length >= 1}
         {#each searchList as item}
-            <Card 
+            <Card
                 on:click={() => openTodo(item.id)}
-                on:delete={() => removeSearchTodoFromList(item.id)} 
-                on:done={() => todoComplete(item.id)} 
+                on:delete={() => removeSearchTodoFromList(item.id)}
+                on:done={() => todoComplete(item.id)}
                 todoStatus={item.status}
                 text={item.todo}
                 search={true}

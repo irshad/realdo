@@ -1,7 +1,7 @@
 <script>
 	import OutClick from 'svelte-outclick';
     import { createEventDispatcher } from "svelte";
-    
+
     const dispatch = createEventDispatcher();
     export let menu = false;
     export let todoStatus = false;
@@ -29,7 +29,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-            {:else}              
+            {:else}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"> </circle>
                     <circle cx="12" cy="19" r="1"></circle>
@@ -37,7 +37,7 @@
             {/if}
         </button>
     </div>
-    
+
     <OutClick on:outclick={() => menu = false}>
         {#if menu}
             <div class="menu">
