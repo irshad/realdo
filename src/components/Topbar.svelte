@@ -8,12 +8,12 @@
     let loading = false;
 
     const navHeaderButton = () => {
-        dispatch('refresh');
-        loading = !loading;
+        dispatch('openSearch');
+        // loading = !loading;
 
-        setTimeout(() => {
-            loading = !loading;
-        }, 1000);
+        // setTimeout(() => {
+        //     loading = !loading;
+        // }, 1000);
     };
 </script>
 
@@ -27,17 +27,21 @@
             <line x1="21" y1="6" x2="3" y2="6"></line>
             <line x1="21" y1="14" x2="3" y2="14"></line><line x1="21" y1="18" x2="7" y2="18"></line>
         </svg> -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="1 4 1 10 7 10"></polyline>
             <polyline points="23 20 23 14 17 14"></polyline>
             <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-        </svg>
+        </svg> -->
     </button>
 </header>
 
 <Sidenav bind:show/>
 
-<Loader bind:loading />
+<!-- <Loader bind:loading /> -->
 
 <style>
     header {

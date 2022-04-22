@@ -6,6 +6,7 @@
     export let menu = false;
     export let todoStatus = false;
     export let text = '';
+    export let search = false;
 
     const doneButton = () => {
         dispatch('done');
@@ -17,7 +18,7 @@
 </script>
 
 <div class="main-section">
-    <div class="card" class:todo-done={todoStatus}>
+    <div class="card {todoStatus == false ? search == true ? 'search-undone' : '' : ''}" class:todo-done={todoStatus}>
         <div class="todo-text-parent" title={text} on:click>
             <div class="todo-text">
                 {@html text}
@@ -154,5 +155,9 @@
 
     .todo-done {
         background-color: var(--success-color);
+    }
+
+    .search-undone {
+        background-color: var(--light-color);
     }
 </style>

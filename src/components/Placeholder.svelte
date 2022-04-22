@@ -1,9 +1,10 @@
 <script>
-
+    export let title = 'Nothing';
+    export let highlight = 'Here!';
 </script>
 
 <div class="main-section">
-    Nothing <span>Here!</span>
+    {title} <span>{highlight}</span>
 </div>
 
 <style>
