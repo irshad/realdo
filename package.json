@@ -26,6 +26,7 @@
     "btoa": "^1.2.1",
     "pincode-input": "^0.4.3",
     "sirv-cli": "^2.0.0",
+    "svelte-clipboard": "^1.0.0",
     "svelte-outclick": "^3.0.1",
     "svelte-routing": "^1.6.0"
   }

@@ -19,12 +19,7 @@
         </div>
 
         <div class="main-section">
-            <button class="nav-button">
-                Screenshot
-            </button>
-            <button class="nav-button">
-                Take Notes
-            </button>
+            <slot />
         </div>
 
         <h2> RealDO </h2>
@@ -42,7 +37,7 @@
         background-color: var(--primary-color);
         overflow-y: auto;
         width: 250px;
-        z-index: 1010;
+        z-index: 9;
     }
 
     .nav-overlay {
@@ -65,7 +60,6 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        border-bottom: 2px solid var(--dark-color);
     }
 
     .nav-header button {
@@ -89,26 +83,6 @@
         display: grid;
         gap: 16px;
         padding: 16px;
-    }
-
-    .nav-button {
-        height: 38px;
-        width: 100%;
-        padding: 0;
-        font-size: 18px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--light-color);
-        border: 2px solid var(--dark-color);
-        font-weight: 600;
-        font-family: 'Roboto Mono', monospace;
-    }
-
-    .nav-button:hover {
-        transform: translate(4px,-4px);
-        box-shadow: -4px 4px 0 var(--dark-color);
     }
 
     h2 {
