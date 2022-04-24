@@ -2,5 +2,8 @@
 	"appId": "com.realdo.com",
 	"appName": "realDO",
 	"webDir": "public",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"Browser": {}
+	}
 }
