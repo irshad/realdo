@@ -1,6 +1,7 @@
 <script>
 	import OutClick from 'svelte-outclick';
     import { createEventDispatcher } from "svelte";
+    import { Haptics, ImpactStyle  } from '@capacitor/haptics';
 
     const dispatch = createEventDispatcher();
     export let menu = false;
@@ -8,14 +9,20 @@
     export let text = '';
     export let search = false;
 
+    const hapticsVibrate = async () => {
+        await Haptics.impact({ style: ImpactStyle.Medium });
+    };
+
     const doneButton = () => {
         dispatch('done');
         menu = false;
+        hapticsVibrate();
     }
 
     const deleteButton = () => {
         dispatch('delete');
         menu = false;
+        hapticsVibrate();
     }
 </script>
 
