@@ -10,10 +10,12 @@
 
     const doneButton = () => {
         dispatch('done');
+        menu = false;
     }
 
     const deleteButton = () => {
         dispatch('delete');
+        menu = false;
     }
 </script>
 

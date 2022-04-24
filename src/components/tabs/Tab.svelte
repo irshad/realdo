@@ -17,9 +17,11 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        font-size: 16px;
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
         border: 2px solid transparent;
+        color: var(--dark-color);
     }
 
     .selected {

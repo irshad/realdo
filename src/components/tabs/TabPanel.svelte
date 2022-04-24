@@ -4,14 +4,14 @@
 </script>
 
 {#if tab == value}
-    <div class="tab-panel">
+    <div class="tab-panel" id="tab-panel">
         <slot />
     </div>
 {/if}
 
 <style>
     .tab-panel {
-        height: calc(100% - 84px);
-        padding-bottom: 16px;
+        height: calc(100% - 40px);
+        overflow-y: auto;
     }
 </style>

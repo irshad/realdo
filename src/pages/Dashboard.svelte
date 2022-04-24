@@ -10,11 +10,12 @@
     import Tabs from "../components/tabs/Tabs.svelte";
     import Tab from "../components/tabs/Tab.svelte";
     import TabPanel from "../components/tabs/TabPanel.svelte";
-    import NotesCard from "../components/NotesCard.svelte";
 
     let id = '';
     let todoItem = '';
     let todoList = [];
+    let pendingTodoList = [];
+    let completedTodoList = [];
     let todoModal;
     let todoModalID = '';
     let todoModalText = '';
@@ -27,8 +28,19 @@
     onMount(() => {
         if (localStorage.getItem("todoList")) {
             todoList = JSON.parse(localStorage.getItem("todoList"));
-        }
+        };
     });
+
+    $:if(localStorage.getItem("todoList")) {
+        console.log('Called')
+        todoList.forEach((item, index) => {
+            completedTodoList = todoList.filter(item => item.status == true);
+        });
+
+        todoList.forEach((item, index) => {
+            pendingTodoList = todoList.filter(item => item.status == false);
+        });
+    }
 
     const mongoObjectId = () => {
 		id = (new Date().getTime() / 1000 | 0).toString(16);
@@ -38,10 +50,12 @@
 	};
 
     const addTodo = () => {
+        tab = 1;
         mongoObjectId();
 		todoList = [...todoList, {id: id, todo: todoItem, status: false}];
 		todoItem = '';
         localStorage.setItem('todoList', JSON.stringify(todoList));
+        document.getElementById("tab-panel").scrollTop = document.getElementById("tab-panel").scrollHeight + 80;
     };
 
     const removeTodoFromList = (index) => {
@@ -109,12 +123,12 @@
 <Section>
     <Tabs>
         <Tab label="one" bind:tab value="1">Todo</Tab>
-        <Tab label="two" bind:tab value="2">Notes</Tab>
+        <Tab label="two" bind:tab value="2">Completed</Tab>
     </Tabs>
 
     <TabPanel {tab} value="1">
-        {#if todoList.length >= 1}
-            {#each todoList as item}
+        {#if pendingTodoList.length >= 1}
+            {#each pendingTodoList as item}
                 <Card
                     on:click={() => openTodo(item.id)}
                     on:delete={() => removeTodoFromList(item.id)}
@@ -130,8 +144,17 @@
     </TabPanel>
 
     <TabPanel {tab} value="2">
-        {#if localStorage.getItem("notes")}
-            <NotesCard text={localStorage.getItem("notes")}/>
+        {#if completedTodoList.length >= 1}
+            {#each completedTodoList as item}
+                <Card
+                    on:click={() => openTodo(item.id)}
+                    on:delete={() => removeTodoFromList(item.id)}
+                    on:done={() => todoComplete(item.id)}
+                    todoStatus={item.status}
+                    text={item.todo}
+                    search={false}
+                />
+            {/each}
         {:else}
             <Placeholder />
         {/if}
