@@ -7,6 +7,10 @@
     import Placeholder from "../components/Placeholder.svelte";
     import TodoModal from "../components/TodoModal.svelte";
     import Search from "../components/Search.svelte";
+    import Tabs from "../components/tabs/Tabs.svelte";
+    import Tab from "../components/tabs/Tab.svelte";
+    import TabPanel from "../components/tabs/TabPanel.svelte";
+    import NotesCard from "../components/NotesCard.svelte";
 
     let id = '';
     let todoItem = '';
@@ -18,6 +22,7 @@
     let showSearch = false;
     let searchValue;
     let searchList = [];
+    let tab;
 
     onMount(() => {
         if (localStorage.getItem("todoList")) {
@@ -102,20 +107,35 @@
 
 <Topbar on:openSearch={() => showSearch = !showSearch} />
 <Section>
-    {#if todoList.length >= 1}
-        {#each todoList as item}
-            <Card
-                on:click={() => openTodo(item.id)}
-                on:delete={() => removeTodoFromList(item.id)}
-                on:done={() => todoComplete(item.id)}
-                todoStatus={item.status}
-                text={item.todo}
-                search={false}
-            />
-        {/each}
-    {:else}
-        <Placeholder />
-    {/if}
+    <Tabs>
+        <Tab label="one" bind:tab value="1">Todo</Tab>
+        <Tab label="two" bind:tab value="2">Notes</Tab>
+    </Tabs>
+
+    <TabPanel {tab} value="1">
+        {#if todoList.length >= 1}
+            {#each todoList as item}
+                <Card
+                    on:click={() => openTodo(item.id)}
+                    on:delete={() => removeTodoFromList(item.id)}
+                    on:done={() => todoComplete(item.id)}
+                    todoStatus={item.status}
+                    text={item.todo}
+                    search={false}
+                />
+            {/each}
+        {:else}
+            <Placeholder />
+        {/if}
+    </TabPanel>
+
+    <TabPanel {tab} value="2">
+        {#if localStorage.getItem("notes")}
+            <NotesCard text={localStorage.getItem("notes")}/>
+        {:else}
+            <Placeholder />
+        {/if}
+    </TabPanel>
 </Section>
 
 <Footer bind:todoItem on:todo={addTodo} />

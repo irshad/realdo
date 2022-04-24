@@ -4,15 +4,15 @@
     import Toast from "../stores/toast";
 </script>
 
-<div class="toast-wrapper">
-    {#if $Toast.show}
+{#if $Toast.show}
+    <div class="toast-wrapper">
         <div class="toast-item {$Toast.type}"
             in:fly={{ delay: 0, duration: 300, x: 0, y: 50, opacity: 0.1, easing: backOut, }}
             out:fade={{ duration: 200, opacity: 0 }}>
             {$Toast.message}
         </div>
-    {/if}
-</div>
+    </div>
+{/if}
 
 <style>
     .toast-wrapper {
