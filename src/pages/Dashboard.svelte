@@ -32,11 +32,12 @@
     });
 
     $:if(localStorage.getItem("todoList")) {
-        console.log('Called')
+        completedTodoList = [];
         todoList.forEach((item, index) => {
             completedTodoList = todoList.filter(item => item.status == true);
         });
-
+        
+        pendingTodoList = [];
         todoList.forEach((item, index) => {
             pendingTodoList = todoList.filter(item => item.status == false);
         });
