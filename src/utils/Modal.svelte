@@ -2,11 +2,12 @@
     import { fade } from "svelte/transition";
 
     export let show = true;
+    export let width = '';
 </script>
 
 {#if show}
     <div class="modal-overlay" transition:fade={{ duration: 150 }}>
-        <div class="modal-container">
+        <div class="modal-container" style="width: {width};">
             <slot />
         </div>
     </div>
