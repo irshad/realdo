@@ -28,19 +28,19 @@
 	}
 </script>
 
-{#if splashscreen}
+<!-- {#if splashscreen}
 	<SplashScreen />
 {:else}
-	{#if dashboard}
+	{#if dashboard} -->
 		<Dashboard/>
-	{:else}
+	<!-- {:else}
 		{#if landingPage }
 			<SignIn on:goto={openPage}/>
 		{:else}
 			<SignUp/>
 		{/if}
 	{/if}
-{/if}
+{/if} -->
 
 <Toast />
 

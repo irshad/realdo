@@ -19,4 +19,9 @@ public class MainActivity extends BridgeActivity {
     getWindow().setNavigationBarColor(
         ContextCompat.getColor(MainActivity.this, R.color.colorPrimary));
   }
+
+  @Override
+  public void onBackPressed() {
+    this.moveTaskToBack(true);
+  }
 }

@@ -2,7 +2,8 @@ import { writable } from 'svelte/store';
 
 export const TOAST_TYPES = {
     SUCCESS: 'success',
-    ERROR: 'danger'
+    ERROR: 'danger',
+    WARNING: 'warning'
 }
 
 const createToastStore = () => {
@@ -28,6 +29,14 @@ const createToastStore = () => {
                 ...u,
                 show: true,
                 type: TOAST_TYPES.ERROR,
+                message: msg
+            }))
+        },
+        warning: msg => {
+            update(u => ({
+                ...u,
+                show: true,
+                type: TOAST_TYPES.WARNING,
                 message: msg
             }))
         },

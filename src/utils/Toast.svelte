@@ -39,12 +39,15 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     }
 
-
     :global(.danger) {
         background-color: var(--danger-color);
     }
 
     :global(.success) {
         background-color: var(--success-color);
+    }
+
+    :global(.warning) {
+        background-color: var(--warning-color);
     }
 </style>

@@ -1,16 +1,12 @@
 <script>
-    import { fly, fade } from "svelte/transition";
+    import { fly } from "svelte/transition";
     export let show = false;
-
-    function overlay_click(e) {
-        if ("close" in e.target.dataset) show = false;
-    }
 </script>
 
 {#if show}
-    <nav transition:fly={{ x: 250, opacity: 1 }}>
+    <nav in:fly={{ x:2000, duration: 300 }} out:fly={{ x:3000, duration: 1200 }}>
         <div class="nav-header">
-            <button on:click={() => { show = !show; }}>
+            <button on:click={() => { show = false }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -24,7 +20,6 @@
 
         <h2> RealDO </h2>
     </nav>
-    <span class="nav-overlay" data-close on:click={overlay_click} transition:fade={{ duration: 150 }} />
 {/if}
 
 <style>
@@ -33,25 +28,10 @@
         top: 0;
         right: 0;
         height: 100%;
-        border-left: 2px solid var(--dark-color);
         background-color: var(--primary-color);
         overflow-y: auto;
-        width: 250px;
-        z-index: 9;
-    }
-
-    .nav-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: block;
         width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 2;
-        cursor: pointer;
+        z-index: 9;
     }
 
     .nav-header {
