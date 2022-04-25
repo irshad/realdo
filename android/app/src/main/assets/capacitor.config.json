@@ -5,6 +5,17 @@
 	"bundledWebRuntime": false,
 	"plugins": {
 		"Browser": {},
-		"Haptics": {}
+		"Haptics": {},
+		"SplashScreen": {
+			"launchShowDuration": 0,
+			"launchAutoHide": true,
+			"backgroundColor": "#15aabf",
+			"androidSplashResourceName": "splash",
+			"androidScaleType": "CENTER_CROP",
+			"showSpinner": false,
+			"splashFullScreen": true,
+			"splashImmersive": true,
+			"layoutName": "launch_screen"
+		}
 	}
 }

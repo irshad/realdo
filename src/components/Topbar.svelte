@@ -131,7 +131,7 @@
 
 <Modal bind:show={restoreData} width="204px">
     <h4>
-        Restoring backup will overwrite all your exiting todo's.
+        Restoring backup will overwrites all your exiting todos.
     </h4>
     
     <div class="btn-section">

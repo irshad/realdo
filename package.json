@@ -25,6 +25,7 @@
     "@capacitor/core": "^3.4.3",
     "@capacitor/filesystem": "^1.1.0",
     "@capacitor/haptics": "^1.1.4",
+    "@capacitor/splash-screen": "^1.2.2",
     "atob": "^2.1.2",
     "btoa": "^1.2.1",
     "pincode-input": "^0.4.3",
