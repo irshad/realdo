@@ -4,13 +4,16 @@
     import { createEventDispatcher } from "svelte";
     import Notes from "./Notes.svelte";
     import Toast from "../stores/toast";
+    import Modal from "../utils/Modal.svelte";
     import { Browser } from '@capacitor/browser';
+    import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
     const dispatch = createEventDispatcher();
 
     let show = false;
     let loading = false;
     let notes = false;
+    let restoreData = false;
 
     const refresh = () => {
         loading = !loading;
@@ -25,8 +28,26 @@
         show = !show;
     };
 
-    const backup = () => {
-        Toast.success('Coming Soon!');
+    const backup = async () => {
+        await Filesystem.writeFile({
+            path: 'realdo.json',
+            data: localStorage.getItem("todoList"),
+            directory: Directory.Documents,
+            encoding: Encoding.UTF8,
+        });
+        Toast.success('Backup Successful');
+    };
+
+    const restore = async () => {
+        localStorage.removeItem("todoList");
+        const contents = await Filesystem.readFile({
+            path: 'realdo.json',
+            directory: Directory.Documents,
+            encoding: Encoding.UTF8,
+        });
+        localStorage.setItem("todoList", contents.data);
+        restoreData = !restoreData;
+        Toast.success('Restore Successful');
     };
 
     const contactUs = async () => {
@@ -75,16 +96,6 @@
         Refresh
     </button>
 
-    <button class="nav-button" on:click={backup}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 16 12 12 8 16"></polyline>
-            <line x1="12" y1="12" x2="12" y2="21"></line>
-            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-            <polyline points="16 16 12 12 8 16"></polyline>
-        </svg>
-        Backup
-    </button>
-
     <button class="nav-button"  on:click={contactUs}>
         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -92,14 +103,50 @@
         </svg>
         Contact
     </button>
+    
+    <div class="backup-restore-btn">
+        <button class="nav-button" on:click={backup}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 16 12 12 8 16"></polyline>
+                <line x1="12" y1="12" x2="12" y2="21"></line>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                <polyline points="16 16 12 12 8 16"></polyline>
+            </svg>
+            Backup
+        </button>
+        
+        <button class="nav-button" on:click={() => (restoreData = !restoreData)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="8 17 12 21 16 17"></polyline>
+                <line x1="12" y1="12" x2="12" y2="21"></line>
+                <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
+            </svg>
+            Restore
+        </button>
+    </div>
 </Sidenav>
 
 <Loader bind:loading />
 <Notes bind:notes/>
 
+<Modal bind:show={restoreData} width="204px">
+    <h4>
+        Restoring backup will overwrite all your exiting todo's.
+    </h4>
+    
+    <div class="btn-section">
+        <button class="delete-btn br-8" on:click={() => (restoreData = !restoreData)}>
+            Cancel
+        </button>
+        <button class="cancel-btn br-8" on:click={restore}>
+            Restore
+        </button>
+    </div>
+</Modal>
+
 <style>
     header {
-        height: 54px;
+        height: 64px;
         padding: 0 16px;
         display: flex;
         align-items: center;
@@ -141,7 +188,7 @@
     }
 
     .nav-button {
-        height: 38px;
+        height: 40px;
         width: 100%;
         padding: 0 16px;
         font-size: 18px;
@@ -154,5 +201,51 @@
         border: 2px solid var(--dark-color);
         font-weight: 600;
         font-family: 'Roboto Mono', monospace;
+    }
+
+    h4 {
+        margin: 0 0 24px 0;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dark-color);
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .btn-section {
+        width: 100%;
+        gap: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-section button {
+        width: 100%;
+        height: 32px;
+        border: 2px solid var(--dark-color);
+        padding: 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .cancel-btn {
+        background-color: var(--success-color);
+    }
+
+    .delete-btn {
+        background-color: var(--danger-color);
+    }
+
+    .cancel-btn:hover, .delete-btn:hover {
+        transform: translate(4px,-4px);
+        box-shadow: -4px 4px 0 var(--dark-color);
+    }
+
+    .backup-restore-btn {
+        gap: 16px;
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-start; 
     }
 </style>

@@ -22,7 +22,7 @@
 
 <style>
     form {
-        height: 56px;
+        height: 64px;
         padding: 0 16px;
         border-top: 2px solid var(--dark-color);
         background-color: var(--primary-color);

@@ -10,7 +10,7 @@
     .section {
         padding: 16px;
         overflow: hidden;
-        height: calc(100% - 146px);
+        height: calc(100% - 164px);
         border-top: 0;
         border-bottom: 0;
     }

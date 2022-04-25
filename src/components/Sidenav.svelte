@@ -27,15 +27,15 @@
         position: fixed;
         top: 0;
         right: 0;
+        width: 100%;
         height: 100%;
         background-color: var(--primary-color);
         overflow-y: auto;
-        width: 100%;
         z-index: 9;
     }
 
     .nav-header {
-        height: 54px;
+        height: 64px;
         padding: 0 16px;
         display: flex;
         align-items: center;
@@ -63,6 +63,7 @@
         display: grid;
         gap: 16px;
         padding: 16px;
+        margin-top: -14px;
     }
 
     h2 {
@@ -76,5 +77,12 @@
         color: var(--dark-color);
         font-weight: 700;
         font-family: 'Roboto Mono', monospace;
+    }
+
+    @media (min-width: 1025px) and (max-width: 1920px){
+        nav {
+            width: 300px;
+            border-left: 2px solid var(--dark-color);
+        }
     }
 </style>
