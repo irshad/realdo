@@ -14,6 +14,7 @@
     let loading = false;
     let notes = false;
     let restoreData = false;
+    let todoList = [];
 
     const refresh = () => {
         loading = !loading;

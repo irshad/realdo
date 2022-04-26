@@ -29,7 +29,6 @@
         if (atob(savedPassword) == password) {
             dispatch('goto');
         } else {
-            // alert('Wrong PIN');
             Toast.error('Wrong PIN');
         }
     };
