@@ -51,9 +51,9 @@
             <div class="pin-section">
                 <div id="input-value"></div>
             </div>
-            <button type="submit" class="jump-in br-12">
+            <!-- <button type="submit" class="jump-in br-12">
                 Jump In
-            </button>
+            </button> -->
         </form>
         <button class="forgot-pin br-8" on:click={fogotPin}>
             Fogot Pin

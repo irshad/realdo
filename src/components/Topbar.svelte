@@ -18,6 +18,9 @@
     const refresh = () => {
         loading = !loading;
         show = !show;
+        if (localStorage.getItem("todoList")) {
+            todoList = JSON.parse(localStorage.getItem("todoList"));
+        };
         setTimeout(() => {
             loading = !loading;
         }, 1000);
@@ -29,25 +32,33 @@
     };
 
     const backup = async () => {
-        await Filesystem.writeFile({
-            path: 'realdo.json',
-            data: localStorage.getItem("todoList"),
-            directory: Directory.Documents,
-            encoding: Encoding.UTF8,
-        });
-        Toast.success('Backup Successful');
+        try {
+            await Filesystem.writeFile({
+                path: 'realdo.json',
+                data: localStorage.getItem("todoList"),
+                directory: Directory.Documents,
+                encoding: Encoding.UTF8,
+            });
+            Toast.success('Backup Successful');
+        } catch (error) {
+            Toast.error(error);
+        }
     };
-
+    
     const restore = async () => {
-        localStorage.removeItem("todoList");
-        const contents = await Filesystem.readFile({
-            path: 'realdo.json',
-            directory: Directory.Documents,
-            encoding: Encoding.UTF8,
-        });
-        localStorage.setItem("todoList", contents.data);
-        restoreData = !restoreData;
-        Toast.success('Restore Successful');
+        try {            
+            localStorage.removeItem("todoList");
+            const contents = await Filesystem.readFile({
+                path: 'realdo.json',
+                directory: Directory.Documents,
+                encoding: Encoding.UTF8,
+            });
+            localStorage.setItem("todoList", contents.data);
+            restoreData = !restoreData;
+            Toast.success('Restore Successful');
+        } catch (error) {
+            Toast.error(error);
+        }
     };
 
     const contactUs = async () => {

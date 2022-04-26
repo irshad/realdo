@@ -81,7 +81,7 @@
 
     @media (min-width: 1025px) and (max-width: 1920px){
         nav {
-            width: 300px;
+            width: 350px;
             border-left: 2px solid var(--dark-color);
         }
     }

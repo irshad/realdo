@@ -10,6 +10,7 @@
     import Tabs from "../components/tabs/Tabs.svelte";
     import Tab from "../components/tabs/Tab.svelte";
     import TabPanel from "../components/tabs/TabPanel.svelte";
+    import PullToRefresh from "../components/PullToRefresh.svelte";
 
     let id = '';
     let todoItem = '';
@@ -118,69 +119,77 @@
             searchList = [];
         }
     })();
+
+    const refresh = () => {
+        if (localStorage.getItem("todoList")) {
+            todoList = JSON.parse(localStorage.getItem("todoList"));
+        };
+    };
 </script>
 
-<Topbar on:openSearch={() => showSearch = !showSearch} />
-<Section>
-    <Tabs>
-        <Tab label="one" bind:tab value="1">Todo</Tab>
-        <Tab label="two" bind:tab value="2">Completed</Tab>
-    </Tabs>
-
-    <TabPanel {tab} value="1">
-        {#if pendingTodoList.length >= 1}
-            {#each pendingTodoList as item}
+<PullToRefresh on:refresh={refresh}>
+    <Topbar on:openSearch={() => showSearch = !showSearch} />
+    <Section>
+        <Tabs>
+            <Tab label="one" bind:tab value="1">Todo</Tab>
+            <Tab label="two" bind:tab value="2">Completed</Tab>
+        </Tabs>
+    
+        <TabPanel {tab} value="1">
+            {#if pendingTodoList.length >= 1}
+                {#each pendingTodoList as item}
+                    <Card
+                        on:click={() => openTodo(item.id)}
+                        on:delete={() => removeTodoFromList(item.id)}
+                        on:done={() => todoComplete(item.id)}
+                        todoStatus={item.status}
+                        text={item.todo}
+                        search={false}
+                    />
+                {/each}
+            {:else}
+                <Placeholder />
+            {/if}
+        </TabPanel>
+    
+        <TabPanel {tab} value="2">
+            {#if completedTodoList.length >= 1}
+                {#each completedTodoList as item}
+                    <Card
+                        on:click={() => openTodo(item.id)}
+                        on:delete={() => removeTodoFromList(item.id)}
+                        on:done={() => todoComplete(item.id)}
+                        todoStatus={item.status}
+                        text={item.todo}
+                        search={false}
+                    />
+                {/each}
+            {:else}
+                <Placeholder />
+            {/if}
+        </TabPanel>
+    </Section>
+    
+    <Footer bind:todoItem on:todo={addTodo} />
+    <TodoModal bind:todoModal bind:todoModalText bind:todoModalStatus bind:todoModalID on:updateTodo={updateTodo}/>
+    
+    <Search bind:showSearch on:search={search} bind:searchValue>
+        {#if searchList.length >= 1}
+            {#each searchList as item}
                 <Card
                     on:click={() => openTodo(item.id)}
-                    on:delete={() => removeTodoFromList(item.id)}
+                    on:delete={() => removeSearchTodoFromList(item.id)}
                     on:done={() => todoComplete(item.id)}
                     todoStatus={item.status}
                     text={item.todo}
-                    search={false}
+                    search={true}
                 />
             {/each}
         {:else}
-            <Placeholder />
+            <Placeholder/>
         {/if}
-    </TabPanel>
-
-    <TabPanel {tab} value="2">
-        {#if completedTodoList.length >= 1}
-            {#each completedTodoList as item}
-                <Card
-                    on:click={() => openTodo(item.id)}
-                    on:delete={() => removeTodoFromList(item.id)}
-                    on:done={() => todoComplete(item.id)}
-                    todoStatus={item.status}
-                    text={item.todo}
-                    search={false}
-                />
-            {/each}
-        {:else}
-            <Placeholder />
-        {/if}
-    </TabPanel>
-</Section>
-
-<Footer bind:todoItem on:todo={addTodo} />
-<TodoModal bind:todoModal bind:todoModalText bind:todoModalStatus bind:todoModalID on:updateTodo={updateTodo}/>
-
-<Search bind:showSearch on:search={search} bind:searchValue>
-    {#if searchList.length >= 1}
-        {#each searchList as item}
-            <Card
-                on:click={() => openTodo(item.id)}
-                on:delete={() => removeSearchTodoFromList(item.id)}
-                on:done={() => todoComplete(item.id)}
-                todoStatus={item.status}
-                text={item.todo}
-                search={true}
-            />
-        {/each}
-    {:else}
-        <Placeholder/>
-    {/if}
-</Search>
+    </Search>
+</PullToRefresh>
 
 <style>
 
