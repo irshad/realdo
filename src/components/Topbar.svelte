@@ -7,6 +7,16 @@
     import Modal from "../utils/Modal.svelte";
     import { Browser } from '@capacitor/browser';
     import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+    
+    // icons
+    import NotesIcon from "./svg/NotesIcon.svelte";
+    import RefreshIcon from "./svg/RefreshIcon.svelte";
+    import ContactIcon from "./svg/ContactIcon.svelte";
+    import BackupIcon from "./svg/BackupIcon.svelte";
+    import RestoreIcon from "./svg/RestoreIcon.svelte";
+    import MenuIcon from "./svg/MenuIcon.svelte";
+    import SearchIcon from "./svg/SearchIcon.svelte";
+import BrowserIcon from "./svg/BrowserIcon.svelte";
 
     const dispatch = createEventDispatcher();
 
@@ -63,7 +73,19 @@
     };
 
     const contactUs = async () => {
-        await Browser.open({ url: 'https://forms.gle/KYKBrJF3Yhge5TXa6' });
+        await Browser.open({ 
+            url: 'https://forms.gle/KYKBrJF3Yhge5TXa6',
+            toolbarColor : "#15aabf",
+            windowName: "RealDO"
+        });
+    };
+
+    const browser = async () => {
+        await Browser.open({ 
+            url: 'https://google.com',
+            toolbarColor : "#15aabf",
+            windowName: "RealDO"
+        });
     };
 </script>
 
@@ -73,66 +95,43 @@
     </h1>
     <div class="menu-left">
         <button class="menu-btn" on:click={() => dispatch('openSearch')}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+            <SearchIcon />
         </button>
         <button class="menu-btn" on:click={() => show = !show}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
+            <MenuIcon />
         </button>
     </div>
 </header>
 
 <Sidenav bind:show>
     <button class="nav-button" on:click={openNotes}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-        </svg>
+        <NotesIcon />
         Notes
     </button>
     
+    <button class="nav-button"  on:click={browser}>
+        <BrowserIcon />
+        Browser
+    </button>
+    
     <button class="nav-button" on:click={refresh}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="1 4 1 10 7 10"></polyline>
-            <polyline points="23 20 23 14 17 14"></polyline>
-            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-        </svg>
+        <RefreshIcon />
         Refresh
     </button>
 
     <button class="nav-button"  on:click={contactUs}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
+        <ContactIcon />
         Contact
     </button>
     
     <div class="backup-restore-btn">
         <button class="nav-button" on:click={backup}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="16 16 12 12 8 16"></polyline>
-                <line x1="12" y1="12" x2="12" y2="21"></line>
-                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-                <polyline points="16 16 12 12 8 16"></polyline>
-            </svg>
+            <BackupIcon />
             Backup
         </button>
         
         <button class="nav-button" on:click={() => (restoreData = !restoreData)}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="8 17 12 21 16 17"></polyline>
-                <line x1="12" y1="12" x2="12" y2="21"></line>
-                <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
-            </svg>
+            <RestoreIcon />
             Restore
         </button>
     </div>

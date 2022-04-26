@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    import AddIcon from "./svg/AddIcon.svelte";
     const dispatch = createEventDispatcher();
 
     export let todoItem = "";
@@ -13,9 +14,7 @@
     <input class="br-8" type="search" bind:value={todoItem} placeholder="Add Todo..">
     {#if todoItem}
         <button class="add-btn br-8" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <AddIcon />
         </button>
     {/if}
 </form>
