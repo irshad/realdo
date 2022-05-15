@@ -3,15 +3,18 @@
 	import SignIn from "./pages/auth/SignIn.svelte";
 	import SignUp from "./pages/auth/SignUp.svelte";
 	import Dashboard from "./pages/Dashboard.svelte";
-	import SplashScreen from "./pages/SplashScreen.svelte";
+	import AppSplashScreen from "./pages/SplashScreen.svelte";
 	import Toast from "./utils/Toast.svelte";
+	import { SplashScreen } from '@capacitor/splash-screen';
 
 	let landingPage = false;
 	let dashboard = false;
 	let splashscreen = true;
 	let user = localStorage.getItem("pin");
 
-	onMount(() =>{
+	onMount(async() =>{
+		await SplashScreen.hide();
+		
 		setTimeout(() => {
 			splashscreen = false
 		}, 1500);
@@ -29,7 +32,7 @@
 </script>
 
 {#if splashscreen}
-	<SplashScreen />
+	<AppSplashScreen />
 {:else}
 	{#if dashboard}
 		<Dashboard/>

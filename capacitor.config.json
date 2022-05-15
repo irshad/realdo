@@ -8,7 +8,9 @@
     "Haptics": {},
     "SplashScreen": {
       "launchShowDuration": 0,
-      "backgroundColor": "#15aabf"
+      "backgroundColor": "#15aabf",
+      "splashFullScreen": true,
+      "splashImmersive": true
     }
   }
 }

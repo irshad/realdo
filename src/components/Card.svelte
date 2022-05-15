@@ -4,12 +4,14 @@
     import { Haptics, ImpactStyle  } from '@capacitor/haptics';
     import TodoIcon from './svg/TodoIcon.svelte';
     import TickIcon from './svg/TickIcon.svelte';
+	import moment from 'moment';
 
     const dispatch = createEventDispatcher();
     export let menu = false;
     export let todoStatus = false;
     export let text = '';
     export let search = false;
+    export let timeDate = ''; 
 
     const hapticsVibrate = async () => {
         await Haptics.impact({ style: ImpactStyle.Medium });
@@ -33,6 +35,7 @@
         <div class="todo-text-parent" title={text} on:click>
             <div class="todo-text">
                 {@html text}
+                <div class="time-date"> {moment(timeDate).format("h:mm A, Do MMM")} </div>
             </div>
         </div>
         <button class="menu-btn br-8" on:click={() => menu =!menu}>
@@ -99,6 +102,11 @@
         font-size: 16px;
         font-weight: 800;
         font-family: 'Roboto Mono', monospace;
+    }
+
+    .time-date {
+        font-size: 10px;
+        margin-top: 6px;
     }
 
     .menu-btn {

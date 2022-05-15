@@ -25,11 +25,20 @@
     let searchValue;
     let searchList = [];
     let tab;
+    let timeDate;
 
     onMount(() => {
         if (localStorage.getItem("todoList")) {
             todoList = JSON.parse(localStorage.getItem("todoList"));
         };
+
+        document.addEventListener('swiped-left', function(e) {
+            tab = 2;
+        });
+
+        document.addEventListener('swiped-right', function(e) {
+            tab = 1;
+        });
     });
 
     $:if(localStorage.getItem("todoList")) {
@@ -54,7 +63,8 @@
     const addTodo = () => {
         tab = 1;
         mongoObjectId();
-		todoList = [...todoList, {id: id, todo: todoItem, status: false}];
+        timeDate = new Date();
+		todoList = [...todoList, {id: id, todo: todoItem, timeDate: timeDate, status: false}];
 		todoItem = '';
         localStorage.setItem('todoList', JSON.stringify(todoList));
         document.getElementById("tab-panel").scrollTop = document.getElementById("tab-panel").scrollHeight + 80;
@@ -144,6 +154,7 @@
                         on:done={() => todoComplete(item.id)}
                         todoStatus={item.status}
                         text={item.todo}
+                        timeDate={item.timeDate}
                         search={false}
                     />
                 {/each}
@@ -161,6 +172,7 @@
                         on:done={() => todoComplete(item.id)}
                         todoStatus={item.status}
                         text={item.todo}
+                        timeDate={item.timeDate}
                         search={false}
                     />
                 {/each}
@@ -182,6 +194,7 @@
                     on:done={() => todoComplete(item.id)}
                     todoStatus={item.status}
                     text={item.todo}
+                    timeDate={item.timeDate}
                     search={true}
                 />
             {/each}

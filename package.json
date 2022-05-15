@@ -28,9 +28,11 @@
     "@capacitor/splash-screen": "^1.2.2",
     "atob": "^2.1.2",
     "btoa": "^1.2.1",
+    "moment": "^2.29.3",
     "pincode-input": "^0.4.3",
     "sirv-cli": "^2.0.0",
     "svelte-clipboard": "^1.0.0",
+    "svelte-gestures": "^1.4.1",
     "svelte-outclick": "^3.0.1",
     "svelte-routing": "^1.6.0"
   }
