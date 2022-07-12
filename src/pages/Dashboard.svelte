@@ -11,6 +11,8 @@
     import Tab from "../components/tabs/Tab.svelte";
     import TabPanel from "../components/tabs/TabPanel.svelte";
     import PullToRefresh from "../components/PullToRefresh.svelte";
+    import { AppUpdate } from '@robingenz/capacitor-app-update';
+    import Modal from "../utils/Modal.svelte";
 
     let id = '';
     let todoItem = '';
@@ -26,8 +28,9 @@
     let searchList = [];
     let tab;
     let timeDate;
+    let show = false;
 
-    onMount(() => {
+    onMount(async() => {
         if (localStorage.getItem("todoList")) {
             todoList = JSON.parse(localStorage.getItem("todoList"));
         };
@@ -39,6 +42,13 @@
         document.addEventListener('swiped-right', function(e) {
             tab = 1;
         });
+
+        const currentVersionresult = await AppUpdate.getAppUpdateInfo();
+        const availableVersionresult = await AppUpdate.getAppUpdateInfo();
+
+        if(currentVersionresult.currentVersion !== availableVersionresult.availableVersion) {
+            show = true;
+        }
     });
 
     $:if(localStorage.getItem("todoList")) {
@@ -135,6 +145,10 @@
             todoList = JSON.parse(localStorage.getItem("todoList"));
         };
     };
+
+    const openAppStore = async () => {
+        await AppUpdate.openAppStore();
+    };
 </script>
 
 <PullToRefresh on:refresh={refresh}>
@@ -204,6 +218,51 @@
     </Search>
 </PullToRefresh>
 
-<style>
+{#if show}
+    <Modal>
+        <h4>
+            App Update Available
+        </h4>
 
+        <div class="btn-section">
+            <button class="cancel-btn br-8" on:click={() => show=!show}>
+                Not now
+            </button>
+            <button class="delete-btn br-8" on:click={openAppStore}>
+                Download
+            </button>
+        </div>
+    </Modal>
+{/if}
+
+<style>
+    .btn-section {
+        width: 100%;
+        gap: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-section button {
+        width: 100%;
+        height: 32px;
+        border: 2px solid var(--dark-color);
+        padding: 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    .cancel-btn {
+        background-color: var(--success-color);
+    }
+
+    .delete-btn {
+        background-color: var(--danger-color);
+    }
+
+    .cancel-btn:hover, .delete-btn:hover {
+        transform: translate(4px,-4px);
+        box-shadow: -4px 4px 0 var(--dark-color);
+    }
 </style>

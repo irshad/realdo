@@ -1,13 +1,13 @@
 # build files
-echo "Build Started"
+echo "$(tput setaf 3)√√ $(tput setaf 2)Build Started 🚀"
 npm run build
-echo "Build Completed"
+echo "$(tput setaf 3)√√ $(tput setaf 2)Build Completed ✨"
 
 # sync android project
-echo "Android Sync Started"
+echo "$(tput setaf 3)√√ $(tput setaf 2)Android Sync Started 🚀"
 npx cap sync android
-echo "Android Sync Completed"
+echo "$(tput setaf 3)√√ $(tput setaf 2)Android Sync Completed ✨"
 
 #open android studio
-echo "Opening Android Studio"
+echo "$(tput setaf 3)√√ $(tput setaf 2)Opening Android Studio 📂"
 npx cap open android
